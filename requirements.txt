@@ -1,0 +1,8 @@
+django
+psycopg2-binary
+
+gunicorn
+django-extensions
+django-storages[google]
+django-environ
+google-cloud-secret-manager
