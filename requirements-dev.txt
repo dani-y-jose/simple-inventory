@@ -1,4 +1,7 @@
 -r requirements.txt
+# formato del codigo python
 black
+# orden de los imports
 isort
+# estilo y posibles bugs
 pylint
