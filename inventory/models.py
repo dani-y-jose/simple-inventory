@@ -5,13 +5,13 @@ class Location(models.Model):
     name = models.CharField(max_length=200)
     type = models.CharField(max_length=100)
     description = models.CharField(max_length=250)
-    #region_id = models.ForeignKey(
+    # region_id = models.ForeignKey(
     #    Customer, null=True, blank=True, on_delete=models.PROTECT
-    #)
+    # )
 
     def __str__(self):
         return self.name
-    
+
 
 class Item(models.Model):
     model = models.CharField(max_length=100)
@@ -51,4 +51,3 @@ class ItemEvent(models.Model):
 
     def __str__(self):
         return self.type
-
