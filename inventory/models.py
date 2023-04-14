@@ -1,13 +1,32 @@
 from django.db import models
 
 
+class Customer(models.Model):
+    full_name = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    type = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.full_name
+
+
+class Region(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.CharField(max_length=250)
+    address = models.CharField(max_length=200)
+    city = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Location(models.Model):
     name = models.CharField(max_length=200)
     type = models.CharField(max_length=100)
     description = models.CharField(max_length=250)
-    # region_id = models.ForeignKey(
-    #    Customer, null=True, blank=True, on_delete=models.PROTECT
-    # )
+    region_id = models.ForeignKey(
+        Region, null=True, blank=True, on_delete=models.PROTECT
+    )
 
     def __str__(self):
         return self.name
@@ -28,15 +47,6 @@ class Item(models.Model):
 
     def __str__(self):
         return self.model
-
-
-class Customer(models.Model):
-    full_name = models.CharField(max_length=100)
-    city = models.CharField(max_length=100)
-    type = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.full_name
 
 
 class ItemEvent(models.Model):
