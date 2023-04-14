@@ -1,12 +1,24 @@
 from django.db import models
 
 
+class Location(models.Model):
+    name = models.CharField(max_length=200)
+    type = models.CharField(max_length=100)
+    description = models.CharField(max_length=250)
+    # region_id = models.ForeignKey(
+    #    Customer, null=True, blank=True, on_delete=models.PROTECT
+    # )
+
+    def __str__(self):
+        return self.name
+
+
 class Item(models.Model):
     model = models.CharField(max_length=100)
     brand = models.CharField(max_length=100)
     quantity = models.IntegerField(default=0)
     description = models.CharField(max_length=250)
-    # location_id = models.ForeignKey("Location", on_delete=models.CASCADE)
+    location_id = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
     status = models.CharField(max_length=100)
     active = models.BooleanField()
     type = models.CharField(max_length=100)
@@ -31,7 +43,7 @@ class ItemEvent(models.Model):
     item_id = models.ForeignKey(Item, on_delete=models.CASCADE)
     timestamp = models.DateTimeField("date and time event")
     type = models.CharField(max_length=100)
-    # location_id = models.ForeignKey("Location", on_delete=models.CASCADE)
+    location_id = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
     status = models.CharField(max_length=100)
     customer_id = models.ForeignKey(
         Customer, null=True, blank=True, on_delete=models.PROTECT
