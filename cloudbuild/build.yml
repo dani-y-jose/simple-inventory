@@ -1,0 +1,16 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}", "."]
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"]
+
+  - name: "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"
+    entrypoint: /bin/bash
+    args:
+      - '-c'
+      - |
+        python manage.py migrate
+
+substitutions:
+  _SERVICE_NAME: "simple-inventory"

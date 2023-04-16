@@ -1,0 +1,29 @@
+steps:
+  - id: "build image"
+    name: "gcr.io/cloud-builders/docker"
+    args: [ "build", "-t", "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}", "." ]
+
+  - id: "push image"
+    name: "gcr.io/cloud-builders/docker"
+    args: [ "push", "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}" ]
+
+  - id: "deploy to cloudrun"
+    name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: gcloud
+    args:
+      [
+        "run",
+        "deploy",
+        "${_SERVICE_NAME}",
+        "--image=${_IMAGE_NAME}",
+        "--region=${_REGION}",
+        "--platform=managed",
+      ]
+
+options:
+  dynamic_substitutions: true
+
+substitutions:
+  _SERVICE_NAME: "simpley-inventory"
+  _REGION: "us-central1"
+  _IMAGE_NAME: gcr.io/${PROJECT_ID}/${_SERVICE_NAME}
