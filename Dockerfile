@@ -17,4 +17,4 @@ COPY . .
 ENV PORT 8080
 
 # run web service with gunicorn
-CMD exec gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 0 hello.wsgi:application
+CMD exec gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 0 simple_inventory.wsgi:application
