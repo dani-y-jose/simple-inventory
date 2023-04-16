@@ -7,6 +7,14 @@ steps:
     name: "gcr.io/cloud-builders/docker"
     args: [ "push", "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}" ]
 
+  - id: "apply migrations"
+    name: "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"
+    entrypoint: /bin/bash
+    args:
+      - '-c'
+      - |
+        python manage.py migrate
+
   - id: "deploy to cloudrun"
     name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
     entrypoint: gcloud
