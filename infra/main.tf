@@ -46,7 +46,7 @@ resource "google_cloudbuild_trigger" "service-trigger" {
 
   github {
     owner = "dani-y-jose"
-    name =
+    name =  "simple-inventory"
     push {
       branch = "^main$"
     }

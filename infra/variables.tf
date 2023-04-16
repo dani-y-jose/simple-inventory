@@ -17,6 +17,6 @@ variable "region" {
 
 variable "service" {
   type        = string
-  default     = "hello-django"
+  default     = "simple-inventory"
   description = "The name of the service"
 }
