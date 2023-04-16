@@ -24,6 +24,6 @@ options:
   dynamic_substitutions: true
 
 substitutions:
-  _SERVICE_NAME: "hello-django"
+  _SERVICE_NAME: "simpley-inventory"
   _REGION: "us-central1"
   _IMAGE_NAME: gcr.io/${PROJECT_ID}/${_SERVICE_NAME}
