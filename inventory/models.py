@@ -36,6 +36,9 @@ class Location(models.Model):
 class ItemStatus(models.Model):
     item_status = models.CharField(max_length=100, blank=True)
 
+    class Meta:
+        verbose_name_plural = "Item status"
+
     def __str__(self):
         return self.item_status
 
