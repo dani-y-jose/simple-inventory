@@ -15,6 +15,14 @@ steps:
       - |
         python manage.py migrate
 
+  - id: "collect static files"
+    name: "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"
+    entrypoint: /bin/bash
+    args:
+      - '-c'
+      - |
+        python manage.py collectstatic --no-input
+
   - id: "deploy to cloudrun"
     name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
     entrypoint: gcloud
