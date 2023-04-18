@@ -60,7 +60,12 @@ DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = ["*"]
 
-
+# for adding cloudrun service url to trusted origins for CSRF
+CLOUDRUN_SERVICE_URL = env("CLOUDRUN_SERVICE_URL", default=None)
+if CLOUDRUN_SERVICE_URL:
+    CSRF_TRUSTED_ORIGINS = [CLOUDRUN_SERVICE_URL]
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # Application definition
 
 INSTALLED_APPS = [
@@ -71,6 +76,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "inventory",
+    "django_extensions",
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -153,8 +160,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 
+# Define static storage via django-storages[google]
+if env("GS_BUCKET_NAME", default=None):
+    STATIC_ROOT = "/static/"
+    GS_BUCKET_NAME = env("GS_BUCKET_NAME")
+    STATICFILES_DIRS = []
+    DEFAULT_FILE_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
+    STATICFILES_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
+    GS_DEFAULT_ACL = "publicRead"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
