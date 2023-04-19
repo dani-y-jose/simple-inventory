@@ -35,7 +35,7 @@ class Location(models.Model):
 # Example of status: Archived, Reserved, Lent, Borrowed, others
 class ItemStatus(models.Model):
     item_status = models.CharField(max_length=100, blank=True)
-    description = models.CharField(max_length=250)
+    description = models.CharField(max_length=250, null=True)
 
     class Meta:
         verbose_name_plural = "Item status"
