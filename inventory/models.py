@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Customer(models.Model):
@@ -21,8 +22,13 @@ class Region(models.Model):
 
 
 class Location(models.Model):
+    class Type(models.TextChoices):
+        PHYSICAL = "PH", _("Physical")
+        PARTNER = "PA", _("Partner")
+        VIRTUAL = "VI", _("Virtual")
+
+    type = models.CharField(max_length=100, choices=Type.choices, default=Type.PHYSICAL)
     name = models.CharField(max_length=200)
-    type = models.CharField(max_length=100)
     description = models.CharField(max_length=250)
     region_id = models.ForeignKey(
         Region, null=True, blank=True, on_delete=models.PROTECT
