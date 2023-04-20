@@ -7,7 +7,9 @@ class Customer(models.Model):
         RETAIL = "RE", _("Retail")
         WHOLESALE = "WH", _("Wholesale")
 
-    type = models.CharField(max_length=100, choices=Type.choices, default=Type.WHOLESALE)
+    type = models.CharField(
+        max_length=100, choices=Type.choices, default=Type.WHOLESALE
+    )
     full_name = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
 
