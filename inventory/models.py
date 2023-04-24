@@ -31,9 +31,7 @@ class Region(models.Model):
 class Location(models.Model):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=250)
-    region_id = models.ForeignKey(
-        Region, null=True, blank=True, on_delete=models.PROTECT
-    )
+    region = models.ForeignKey(Region, null=True, blank=True, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
@@ -56,7 +54,7 @@ class Item(models.Model):
     brand = models.CharField(max_length=100)
     quantity = models.IntegerField(default=0)
     description = models.CharField(max_length=250)
-    location_id = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
     item_status = models.ForeignKey(
         ItemStatus, null=True, blank=True, on_delete=models.PROTECT
     )
@@ -85,11 +83,11 @@ class ItemEvent(models.Model):
         SOLD = "SO", _("Sold")
 
     type = models.CharField(max_length=100, choices=Type.choices, default=Type.CHECKIN)
-    item_id = models.ForeignKey(Item, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
     timestamp = models.DateTimeField("date and time event")
-    location_id = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
     status = models.CharField(max_length=100)
-    customer_id = models.ForeignKey(
+    customer = models.ForeignKey(
         Customer, null=True, blank=True, on_delete=models.PROTECT
     )
 
