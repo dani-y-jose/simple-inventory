@@ -8,6 +8,7 @@ class CustomUserAdmin(UserAdmin):
     """
     Custom user admin class.
     """
+
     pass
 
 

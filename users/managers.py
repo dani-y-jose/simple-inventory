@@ -5,4 +5,5 @@ class CustomUserManager(BaseUserManager):
     """
     Custom user model manager.
     """
+
     pass
