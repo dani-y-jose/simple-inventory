@@ -1,11 +1,18 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Customer(models.Model):
+    class Type(models.TextChoices):
+        RETAIL = "RE", _("Retail")
+        WHOLESALE = "WH", _("Wholesale")
+        PARTNER = "PA", _("Partner")
+
+    type = models.CharField(max_length=100, choices=Type.choices, default=Type.RETAIL)
     full_name = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
-    type = models.CharField(max_length=100)
+    phone_number = PhoneNumberField(blank=True)
 
     def __str__(self):
         return self.full_name
@@ -22,17 +29,9 @@ class Region(models.Model):
 
 
 class Location(models.Model):
-    class Type(models.TextChoices):
-        PHYSICAL = "PH", _("Physical")
-        PARTNER = "PA", _("Partner")
-        VIRTUAL = "VI", _("Virtual")
-
-    type = models.CharField(max_length=100, choices=Type.choices, default=Type.PHYSICAL)
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=250)
-    region_id = models.ForeignKey(
-        Region, null=True, blank=True, on_delete=models.PROTECT
-    )
+    region = models.ForeignKey(Region, null=True, blank=True, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
@@ -55,7 +54,7 @@ class Item(models.Model):
     brand = models.CharField(max_length=100)
     quantity = models.IntegerField(default=0)
     description = models.CharField(max_length=250)
-    location_id = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
     item_status = models.ForeignKey(
         ItemStatus, null=True, blank=True, on_delete=models.PROTECT
     )
@@ -69,15 +68,32 @@ class Item(models.Model):
         return self.model
 
 
+# class User(models.Model):
+
+
 class ItemEvent(models.Model):
-    item_id = models.ForeignKey(Item, on_delete=models.CASCADE)
+    class Type(models.TextChoices):
+        CHECKIN = "CH", _("Check in")
+        STORED = "ST", _("Stored in warehouse")
+        BORROWED = "BO", _("Borrowed")
+        RETURNED = "RE", _("Returned")
+        DAMAGED = "DA", _("Damaged")
+        REPAIR = "RP", _("Out for repair")
+        LOST = "LO", _("Lost")
+        SOLD = "SO", _("Sold")
+
+    type = models.CharField(max_length=100, choices=Type.choices, default=Type.CHECKIN)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
     timestamp = models.DateTimeField("date and time event")
-    type = models.CharField(max_length=100)
-    location_id = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
     status = models.CharField(max_length=100)
-    customer_id = models.ForeignKey(
+    customer = models.ForeignKey(
         Customer, null=True, blank=True, on_delete=models.PROTECT
     )
 
+    # user_id = models.ForeignKey(
+    #    User, null=True, blanck=True, on_delete=models.PROTECT
+    # )
+    # TODO: add is_lot property
     def __str__(self):
         return self.type

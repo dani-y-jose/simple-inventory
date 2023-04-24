@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     "inventory",
     "django_extensions",
     "storages",
+    "phonenumber_field",
 ]
 
 MIDDLEWARE = [
