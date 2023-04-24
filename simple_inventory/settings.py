@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     "django_extensions",
     "storages",
     "phonenumber_field",
+    "users",
 ]
 
 MIDDLEWARE = [
@@ -175,3 +176,6 @@ if env("GS_BUCKET_NAME", default=None):
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Use custom user model
+AUTH_USER_MODEL = "users.CustomUser"
