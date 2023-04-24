@@ -1,17 +1,18 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Customer(models.Model):
     class Type(models.TextChoices):
         RETAIL = "RE", _("Retail")
         WHOLESALE = "WH", _("Wholesale")
+        PARTNER = "PA", _("Partner")
 
-    type = models.CharField(
-        max_length=100, choices=Type.choices, default=Type.WHOLESALE
-    )
+    type = models.CharField(max_length=100, choices=Type.choices, default=Type.RETAIL)
     full_name = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
+    phone_number = PhoneNumberField(blank=True)
 
     def __str__(self):
         return self.full_name
@@ -29,11 +30,10 @@ class Region(models.Model):
 
 class Location(models.Model):
     class Type(models.TextChoices):
-        PHYSICAL = "PH", _("Physical")
-        PARTNER = "PA", _("Partner")
-        VIRTUAL = "VI", _("Virtual")
+        UNITARIA = "UN", _("Unitaria")
+        GRUPAL = "GR", _("Grupal")
 
-    type = models.CharField(max_length=100, choices=Type.choices, default=Type.PHYSICAL)
+    type = models.CharField(max_length=100, choices=Type.choices, default=Type.UNITARIA)
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=250)
     region_id = models.ForeignKey(
@@ -75,15 +75,31 @@ class Item(models.Model):
         return self.model
 
 
+# class User(models.Model):
+
+
 class ItemEvent(models.Model):
+    class Type(models.TextChoices):
+        CHECKIN = "CH", _("Check in")
+        STORE = "ST", _("Store in warehouse")
+        BORROWED = "BO", _("Borrowed")
+        RETURNED = "RE", _("Returned")
+        DAMAGED = "DA", _("Damaged")
+        REPARED = "RP", _("Out for repair")
+        LOST = "LO", _("Lost")
+        SOLD = "SO", _("Sold")
+
+    type = models.CharField(max_length=100, choices=Type.choices, default=Type.CHECKIN)
     item_id = models.ForeignKey(Item, on_delete=models.CASCADE)
     timestamp = models.DateTimeField("date and time event")
-    type = models.CharField(max_length=100)
     location_id = models.ForeignKey(Location, null=True, on_delete=models.CASCADE)
     status = models.CharField(max_length=100)
     customer_id = models.ForeignKey(
         Customer, null=True, blank=True, on_delete=models.PROTECT
     )
+    # user_id = models.ForeignKey(
+    #    User, null=True, blanck=True, on_delete=models.PROTECT
+    # )
 
     def __str__(self):
         return self.type
