@@ -6,3 +6,4 @@ django-extensions
 django-storages[google]
 django-environ
 google-cloud-secret-manager
+django-phonenumber-field
