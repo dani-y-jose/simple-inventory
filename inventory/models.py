@@ -29,11 +29,6 @@ class Region(models.Model):
 
 
 class Location(models.Model):
-    class Type(models.TextChoices):
-        UNITARIA = "UN", _("Unitaria")
-        GRUPAL = "GR", _("Grupal")
-
-    type = models.CharField(max_length=100, choices=Type.choices, default=Type.UNITARIA)
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=250)
     region_id = models.ForeignKey(
@@ -81,11 +76,11 @@ class Item(models.Model):
 class ItemEvent(models.Model):
     class Type(models.TextChoices):
         CHECKIN = "CH", _("Check in")
-        STORE = "ST", _("Store in warehouse")
+        STORED = "ST", _("Stored in warehouse")
         BORROWED = "BO", _("Borrowed")
         RETURNED = "RE", _("Returned")
         DAMAGED = "DA", _("Damaged")
-        REPARED = "RP", _("Out for repair")
+        REPAIR = "RP", _("Out for repair")
         LOST = "LO", _("Lost")
         SOLD = "SO", _("Sold")
 
@@ -97,9 +92,10 @@ class ItemEvent(models.Model):
     customer_id = models.ForeignKey(
         Customer, null=True, blank=True, on_delete=models.PROTECT
     )
+
     # user_id = models.ForeignKey(
     #    User, null=True, blanck=True, on_delete=models.PROTECT
     # )
-
+    # TODO: add is_lot property
     def __str__(self):
         return self.type
