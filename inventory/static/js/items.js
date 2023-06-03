@@ -38,6 +38,7 @@ const listItems = async () => {
                     <td>${item.description}</td>
                     <td>${item.location_id}</td>
                     <td>${item.item_status_id}</td>
+                    <td><a href="/inventory/items/${item.id}">Details</a></td>
                 </tr>
             `;
         });
