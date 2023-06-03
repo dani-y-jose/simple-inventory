@@ -1,0 +1,63 @@
+{% extends 'inventory/base.html' %}
+
+{% load static %}
+
+{% block body_block %}
+<div class="container mt-5">
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col" colspan="2">Item: {{ item.model }}</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <th scope="row">ID</th>
+      <td>{{ item.id }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Model</th>
+      <td>{{ item.model }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Brand</th>
+      <td>{{ item.brand }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Quantity</th>
+      <td>{{ item.quantity }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Description</th>
+      <td>{{ item.description }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Location</th>
+      <td>{{ item.location }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Status</th>
+      <td>{{ item.item_status }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Type</th>
+      <td>{{ item.type }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Category</th>
+      <td>{{ item.category }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Order Date</th>
+      <td>{{ item.order_date }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Check Date</th>
+      <td>{{ item.check_date }}</td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+{% endblock %}
