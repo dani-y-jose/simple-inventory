@@ -20,3 +20,9 @@ def list_items(request):
 
 def items(request):
     return render(request, "inventory/items.html")
+
+
+def item_detail(request, item_id):
+    item = Item.objects.get(pk=item_id)
+    context = {"item": item}
+    return render(request, "inventory/item_detail.html", context)

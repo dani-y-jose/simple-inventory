@@ -11,37 +11,37 @@
   <body>
     <nav class="navbar navbar-expand-lg bg-body-secondary scrolling-navbar fixed-top">
       <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1" href="http://127.0.0.1:8000/inventory/">Inventory</span>
+        <span class="navbar-brand mb-0 h1" href="{% url 'index' %}">Inventory</span>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="http://127.0.0.1:8000/inventory/">Dashboard</a>
+              <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Dashboard</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Operations
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href=http://127.0.0.1:8000/inventory/items/>Items</a></li>
-                <li><a class="dropdown-item" href=http://127.0.0.1:8000/inventory/>Customers</a></li>
-                <li><a class="dropdown-item" href=http://127.0.0.1:8000/inventory/>Locations</a></li>
+                <li><a class="dropdown-item" href="{% url 'items' %}">Items</a></li>
+                <li><a class="dropdown-item" href="{% url 'index' %}">Customers</a></li>
+                <li><a class="dropdown-item" href="{% url 'index' %}">Locations</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href=http://127.0.0.1:8000/inventory/ role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="{% url 'index' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Reports
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href=http://127.0.0.1:8000/inventory/>Brand</a></li>
-                <li><a class="dropdown-item" href=http://127.0.0.1:8000/inventory/>Category</a></li>
-                <li><a class="dropdown-item" href=http://127.0.0.1:8000/inventory/>Model</a></li>
+                <li><a class="dropdown-item" href="{% url 'index' %}">Brand</a></li>
+                <li><a class="dropdown-item" href="{% url 'index' %}">Category</a></li>
+                <li><a class="dropdown-item" href="{% url 'index' %}">Model</a></li>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href=http://127.0.0.1:8000/inventory/>Settings</a>
+              <a class="nav-link" href="{% url 'index' %}">Settings</a>
             </li>
           </ul>
           <form class="d-flex" role="login">
