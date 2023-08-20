@@ -10,30 +10,6 @@
 {% block body_block %}
 <div class="container mt-5">
     <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <div class="table-responsive">
-                <table id="datatable-items" class="table">
-                    <caption>
-                        Item DataTable
-                    </caption>
-                    <thead>
-                        <tr>
-                            <th class="centered">#</th>
-                            <th class="centered">Model</th>
-                            <th class="centered">Brand</th>
-                            <th class="centered">Quantity</th>
-                            <th class="centered">Description</th>
-                            <th class="centered">Location</th>
-                            <th class="centered">Status</th>
-                            <th>-</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody_items"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <table class="table table-success table-striped table-hover">
             <thead>
               <tr>
@@ -66,11 +42,4 @@
           </table>
     </div>
 </div>
-    <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <!-- DataTable.js -->
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-    <!-- Custom JS-->
-<script src="{% static 'js/items.js' %}"></script>
 {% endblock %}
