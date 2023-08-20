@@ -33,6 +33,38 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <table class="table table-success table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Model</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Description</th>
+                <th scope="col">Location</th>
+                <th scope="col">Status</th>
+                <th scope="col">-</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+              <tr>
+                <th scope="row">{{ item.id }}</th>
+                <td>{{ item.model }}</td>
+                <td>{{ item.brand }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.location }}</td>
+                <td>{{ item.item_status }}</td>
+                <td> 
+                    <a href="{% url 'item_details' item.id %}" class="btn btn-primary" role="button" aria-disabled="true">Details</a>
+                </td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+    </div>
 </div>
     <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
