@@ -19,7 +19,10 @@ def list_items(request):
 
 
 def items(request):
-    return render(request, "inventory/items.html")
+    item_list = Item.objects.all()
+    context = {"items": item_list}
+    print(context)
+    return render(request, "inventory/items.html", context=context)
 
 
 def item_detail(request, item_id):
